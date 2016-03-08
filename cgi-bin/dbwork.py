@@ -11,14 +11,23 @@ def addToBase(mac, phone, passkode):
 
     f = cur.execute('select phone,mac from users where mac="%s"' % mac)
     f = f.fetchall()
-    if not f:
-        try:
-            cur.execute('''
-                insert into users (mac, phone, dreg, daccess, acode, passkode)
-                values (?, ?, ?, ?, ?, ?)
-            ''', (mac, phone, now, now, 1, passkode))
-        except:
-            pass    # не придумал
-        db.commit()
-    else:
-        pass    # не пидумал
+    try:
+        cur.execute('''
+            insert into users (mac, phone, dreg, daccess, acode, passkode)
+            values (?, ?, ?, ?, ?, ?)
+        ''', (mac, phone, now, now, 1, passkode))
+    except:
+        pass    # не придумал
+    db.commit()
+
+    # if not f:
+    #     try:
+    #         cur.execute('''
+    #             insert into users (mac, phone, dreg, daccess, acode, passkode)
+    #             values (?, ?, ?, ?, ?, ?)
+    #         ''', (mac, phone, now, now, 1, passkode))
+    #     except:
+    #         pass    # не придумал
+    #     db.commit()
+    # else:
+    #     pass    # не пидумал
