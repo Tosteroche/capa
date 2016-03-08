@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-import os
+import random
 import cgi
+
 import getmac
 import dbwork
+import fwwork
+
 import config
-import random
 
 form = cgi.FieldStorage()
 
@@ -16,6 +18,7 @@ random.seed(phone)
 passkode = random.randint(1000, 9999)
 
 dbwork.addToBase(mac, phone, passkode)
+fwwork.addToRule(mac)
 
 print('Content-type: text/html')
 print()
