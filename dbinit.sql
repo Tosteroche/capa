@@ -4,5 +4,6 @@ CREATE TABLE users (
     phone integer not null,
     dreg date not null,
     daccess date not null,
-    acode int not null
+    acode integer not null,
+    passkode text
 );
