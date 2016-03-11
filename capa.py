@@ -1,5 +1,7 @@
 import bottle
 import cgi
+import syswork
+
 
 capa = bottle.Bottle()
 
@@ -20,15 +22,35 @@ def access():
 def get_access():
     phone = bottle.request.forms.get('phone')
     phone = cgi.escape(phone)
-
     out = ''
+    if phone:
+        ip = syswork.getIp()
+        mac = syswork.getMac(ip)
+        check = syswork.userCheck(mac, phone)
+        if check == 0:
+            passkode = syswork.userStart(mac, phone)
+            out = bottle.tempfile('get_access', ip=ip, mac=mac, passkode=passkode, phone=phone)
+            return out
+        elif check == 1:
+            return 'you have passkode, we working'
+        elif check == 2:
+            return 'you from eother phone? work on this'
+        elif check == 3:
+            return 'Somthng wrong'
+        else:
+            return 'UFO'
 
-    if not phone:   # TODO: create function valid(phone) -> True or False
-        out = bottle.template('err_access')
+
+@capa.post('/go/<phone>')
+def go(phone):
+    passkode = bottle.request.forms.get('passkode')
+    out = 'enter passkode %s' % passkode
+    if syswork.passCheck(phone=phone, passkode=passkode):
+        return out + ' All gut'
     else:
-        out = 'OK!'
+        return out + ' Wrong passkode'
 
-    return out
+
 
 if __name__ == '__main__':
     bottle.run(app=capa, host='192.168.1.1', reloader=True)

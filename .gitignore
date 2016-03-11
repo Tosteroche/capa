@@ -1,4 +1,5 @@
-db.sqlite3
+base.db
 cgi-bin/getmacaddr.py
 cgi-bin/__pycache__/
 /.Trash*
+__pycache__

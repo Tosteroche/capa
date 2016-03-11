@@ -3,7 +3,7 @@ CREATE TABLE users (
     mac text not null,
     phone integer not null,
     dreg date not null,
-    daccess date not null,
-    acode integer not null,
-    passkode text
+    dlaccess date not null,
+    passkode text,
+    acode integer not null
 );
