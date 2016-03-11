@@ -5,10 +5,7 @@ import cgi
 
 @bottle.route('/')
 def hello():
-    out = ''
-
-    for i in os.environ:
-        out = out + str(i) + '\t' + str(os.environ[i]) + '<br>'
+    out = bottle.request.environ.get('REMOTE_ADDR')
     return out
 
 

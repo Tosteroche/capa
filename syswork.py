@@ -3,10 +3,11 @@ import cgi
 import random
 import datetime
 import dbwork
+import bottle
 
 
 def getIp():
-    return os.environ['REMOTE_ADDR']
+    return bottle.request.environ.get('REMOTE_ADDR')
 
 
 def getMac(ip=False):

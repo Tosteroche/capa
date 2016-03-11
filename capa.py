@@ -29,7 +29,7 @@ def get_access():
         check = syswork.userCheck(mac, phone)
         if check == 0:
             passkode = syswork.userStart(mac, phone)
-            out = bottle.tempfile('get_access', ip=ip, mac=mac, passkode=passkode, phone=phone)
+            out = bottle.template('get_access', ip=ip, mac=mac, passkode=passkode, phone=phone)
             return out
         elif check == 1:
             return 'you have passkode, we working'

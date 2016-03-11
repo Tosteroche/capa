@@ -8,7 +8,7 @@ dbase = 'base.db'
 def checkUser(phone, mac):
     db = sqlite3.connect(dbase)
     cur = db.cursor()
-    f = cur.execute("select mac,phone from users where mac == %s" % mac)
+    f = cur.execute("select mac,phone from users where mac='%s'" % mac)
     f = f.fetchall()
     if not f:               # All gut
         return 0
@@ -42,7 +42,7 @@ def addUser(phone, mac, passkode, acode=0):
 def getPassOfPhone(phone):
     db = sqlite3.connect(dbase)
     cur = db.cursor()
-    f = cur.execute("select passkode from users where phone=%s" % phone)
+    f = cur.execute("select passkode from users where phone='%s'" % phone)
     f = f.fetchall()
     if len(f) == 1:
         return f[0][0]
